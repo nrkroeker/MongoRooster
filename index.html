@@ -26,6 +26,12 @@
               autofocus
               required
             >
+            <input
+              type="text"
+              class="input-group-field"
+              name="country"
+              placeholder="Enter the chickens country of origin"
+              required
             <div class="input-group-button">
               <button
                 class="success button"
@@ -38,9 +44,50 @@
           </div>
         </form>
       </div>
-
     </div>
 
+    <div class="row">
+      <div class="medium-8 medium-offset-2 column">
+        <ul class="no-bullet" id="chicken-list"></ul>
+      </div>
+    </div>
+
+    <li class="chicken template">
+      <!-- Span to put text inside of -->
+      <span class="chicken-name"></span>
+      <span class="actions button-group">
+        <button class="edit button">
+          <i
+            class="fa fa-pencil"
+            aria-hidden="true"
+          ></i>
+        </button>
+        <button class="fav button warning">
+          <i
+            class="fa fa-star"
+            aria-hidden="true"
+          ></i>
+        </button>
+        <button class="move-up button">
+          <i
+            class="fa fa-arrow-up"
+            aria-hidden="true"
+          ></i>
+        </button>
+        <button class="move-down button">
+          <i
+            class="fa fa-arrow-down"
+            aria-hidden="true"
+          ></i>
+        </button>
+        <button class="remove button alert">
+          <i
+            class="fa fa-trash-o"
+            aria-hidden="true"
+          ></i>
+        </button>
+        </span>
+    </li>
 
     <script src="app.js"></script>
   </body>
