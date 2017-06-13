@@ -1,9 +1,13 @@
 class App {
   constructor(selectors) {
     this.chickens = []
+    // this.countries = []
     this.max = 0
-    this.list = document
-      .querySelector(selectors.listSelector)
+    this.listTemplate = document
+      .querySelector(selectors.listTemplateSelector)
+
+    this.listBox = document
+      .querySelector(selectors.listBoxSelector)
 
     this.template = document
       .querySelector(selectors.templateSelector)
@@ -12,7 +16,7 @@ class App {
       .querySelector(selectors.formSelector)
       .addEventListener('submit', this.createChicken.bind(this))
 
-    this.loadList()
+    // this.loadList()
   }
 
   loadList() {
@@ -26,7 +30,10 @@ class App {
     if(chickensArray) {
       chickensArray
         .reverse()
-        .map(this.addChicken.bind(this))
+        .map(function() {
+          // this.createCountry
+          this.addChicken.bind(this)
+        })
     }
   }
 
@@ -39,6 +46,7 @@ class App {
     const item = this.template.cloneNode(true)
     item.classList.remove('template')
     item.dataset.id = chicken.id
+
     item
       .querySelector('.chicken-name')
       .textContent = chicken.name
@@ -69,11 +77,11 @@ class App {
     return item
   }
 
-  addChicken(chicken) {
+  addChicken(chicken, countryList) {
     const li = this.renderListItem(chicken)
 
-    this.list
-      .insertBefore(li, this.list.firstChild)
+    countryList
+      .appendChild(li)
 
     if(chicken.id > this.max) {
       this.max = chicken.id
@@ -81,6 +89,37 @@ class App {
 
     this.chickens.unshift(chicken)
     this.saveList()
+  }
+
+  createCountry(ev, chicken) {
+    ev.preventDefault()
+
+    // for(let i = 0; i < this.countries.length - 1; i++) {
+      // if(this.countries[i] = chicken.country) {
+      //   // Select previously created country list
+      //   break
+      // } else {
+      // }
+    // }
+
+    // Create new country list
+    var countryList = this.listTemplate.cloneNode(true)
+    countryList = countryList.querySelector('ul')
+    countryList.dataset.id = chicken.id
+
+    console.log(countryList)
+
+    countryList
+      .classList.add(chicken.country.toLowerCase())
+
+    countryList
+      .querySelector('.list-title')
+      .textContent = chicken.country.toUpperCase()
+
+    this.listBox
+      .appendChild(countryList)
+
+    return countryList
   }
 
   createChicken(ev) {
@@ -94,7 +133,7 @@ class App {
       fav: false,
     }
 
-    this.addChicken(chicken)
+    this.addChicken(chicken, this.createCountry(ev, chicken))
 
     c.reset()
   }
@@ -195,6 +234,7 @@ class App {
 
 const app = new App({
   formSelector: '#chicken-form',
-  listSelector: '#chicken-list',
+  listTemplateSelector: '.list-template',
+  listBoxSelector: '.list-box',
   templateSelector: '.chicken.template',
 })

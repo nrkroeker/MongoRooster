@@ -2,6 +2,10 @@
   display: none;
 }
 
+.list-template {
+  display: none;
+}
+
 .chicken:first-child button.move-up,
 .chicken:last-child button.move-down {
   background-color: #ddd;
@@ -43,4 +47,8 @@ h1 {
   font-weight: 700;
   text-shadow: -3px -5px black;
   text-align: center;
+}
+
+ul {
+  margin-top: 50px;
 }

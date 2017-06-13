@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Rooster Roster</title>
+    <link rel="shortcut icon" href="roostericon.png" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://use.fontawesome.com/822c467d6f.js"></script>
@@ -18,7 +19,7 @@
     <div class="row">
       <div class="medium-8 medium-offset-2 column">
         <p>
-          <a href="https://en.wikipedia.org/wiki/List_of_chicken_breeds"  target="_blank">Don't know any more chicken breeds? Click here to find more!</a>
+          Don't know any more chicken breeds? <a href="https://en.wikipedia.org/wiki/List_of_chicken_breeds"  target="_blank">Click here to find more!</a>
         </p>
         <form id="chicken-form">
           <div class="input-group">
@@ -50,48 +51,50 @@
       </div>
     </div>
 
-    <div class="row">
-      <div class="medium-8 medium-offset-2 column">
-        <ul class="no-bullet" id="chicken-list"></ul>
+    <div class="list-box">
+      <div class="row list-template template">
+        <div class="medium-8 medium-offset-2 column">
+          <ul class="no-bullet"><span class="list-title"></span></ul>
+        </div>
       </div>
-    </div>
 
-    <li class="chicken template">
-      <!-- Span to put text inside of -->
-      <span class="chicken-name"></span>
-      <span class="actions button-group">
-        <button class="edit button">
-          <i
-            class="fa fa-pencil"
-            aria-hidden="true"
-          ></i>
-        </button>
-        <button class="fav button warning">
-          <i
-            class="fa fa-star"
-            aria-hidden="true"
-          ></i>
-        </button>
-        <button class="move-up button">
-          <i
-            class="fa fa-arrow-up"
-            aria-hidden="true"
-          ></i>
-        </button>
-        <button class="move-down button">
-          <i
-            class="fa fa-arrow-down"
-            aria-hidden="true"
-          ></i>
-        </button>
-        <button class="remove button alert">
-          <i
-            class="fa fa-trash-o"
-            aria-hidden="true"
-          ></i>
-        </button>
-        </span>
-    </li>
+      <li class="chicken template">
+        <!-- Span to put text inside of -->
+        <span class="chicken-name"></span>
+        <span class="actions button-group">
+          <button class="edit button">
+            <i
+              class="fa fa-pencil"
+              aria-hidden="true"
+            ></i>
+          </button>
+          <button class="fav button warning">
+            <i
+              class="fa fa-star"
+              aria-hidden="true"
+            ></i>
+          </button>
+          <button class="move-up button">
+            <i
+              class="fa fa-arrow-up"
+              aria-hidden="true"
+            ></i>
+          </button>
+          <button class="move-down button">
+            <i
+              class="fa fa-arrow-down"
+              aria-hidden="true"
+            ></i>
+          </button>
+          <button class="remove button alert">
+            <i
+              class="fa fa-trash-o"
+              aria-hidden="true"
+            ></i>
+          </button>
+          </span>
+      </li>
+    </div>
 
     <script src="app.js"></script>
   </body>
