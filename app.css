@@ -1,3 +1,46 @@
-.template {
+.chicken.template {
   display: none;
+}
+
+.chicken:first-child button.move-up,
+.chicken:last-child button.move-down {
+  background-color: #ddd;
+  color: #eee;
+  cursor: not-allowed;
+}
+
+.chicken-name {
+  flex-grow: 1;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: calc(100% - 240px);
+}
+
+.chicken {
+    border: 1px solid #ddd;
+    clear: both;
+    display: flex;
+    align-items: center;
+    padding: 0.75rem 1.25rem;
+    transition: 0.25s;
+}
+
+.actions.button-group {
+  margin-bottom: 0;
+}
+
+header {
+  background: url("chickens.jpg");
+  background-size: cover;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-family: "Barrio", cursive;
+  color: white;
+  font-size: 10em;
+  font-weight: 700;
+  text-shadow: -3px -5px black;
+  text-align: center;
 }

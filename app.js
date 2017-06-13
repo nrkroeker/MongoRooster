@@ -46,6 +46,27 @@ class App {
     if (chicken.fav) {
       item.classList.add('fav')
     }
+
+    item
+      .querySelector('.chicken-name')
+      .addEventListener('keypress', this.saveOnEnter.bind(this, chicken))
+
+    item
+      .querySelector('button.remove')
+      .addEventListener('click', this.removeChicken.bind(this))
+    item
+      .querySelector('button.fav')
+      .addEventListener('click', this.favChicken.bind(this, chicken))
+    item
+      .querySelector('button.move-up')
+      .addEventListener('click', this.moveUp.bind(this, chicken))
+    item
+      .querySelector('button.move-down')
+      .addEventListener('click', this.moveDown.bind(this, chicken))
+    item
+      .querySelector('button.edit')
+      .addEventListener('click', this.edit.bind(this, chicken))
+    return item
   }
 
   addChicken(chicken) {
@@ -59,7 +80,7 @@ class App {
     }
 
     this.chickens.unshift(chicken)
-    this.save()
+    this.saveList()
   }
 
   createChicken(ev) {
@@ -75,7 +96,100 @@ class App {
 
     this.addChicken(chicken)
 
-    f.reset()
+    c.reset()
+  }
+
+  favChicken(chicken, ev) {
+    const li = ev.target.closest('.chicken')
+    chicken.fav = !chicken.fav
+
+    if(chicken.fav) {
+      li.classList.add('fav')
+    } else {
+      li.classList.remove('fav')
+    }
+
+    this.saveList()
+  }
+
+  removeChicken(ev, chicken) {
+    const li = ev.target.closest('.chicken')
+
+    for(let i = 0; i < this.chickens.length; i++) {
+      const currentId = this.chickens[i].id.toString()
+
+      if(li.dataset.id === currentId) {
+        this.chickens.splice(i, 1)
+        break
+      }
+    }
+
+    li.remove()
+    this.saveList()
+  }
+
+  moveUp(chicken, ev) {
+    const li = ev.target.closest('.chicken')
+
+    const index = this.chickens.findIndex((currentChicken, i) => {
+      return currentChicken.id === chicken.id
+    })
+
+    if(index > 0) {
+      this.list.insertBefore(li, li.previousElementSibling)
+
+      const previousChicken = this.chickens[index - 1]
+      this.chickens[index - 1] = chicken
+      this.chickens[index] = previousChicken
+      this.saveList()
+    }
+  }
+
+  moveDown(chicken, ev) {
+    const li = ev.target.closest('.chicken')
+
+    const index = this.chickens.findIndex((currentChicken, i) => {
+      return currentChicken.id === chicken.id
+    })
+
+    if(index < this.chickens.length - 1) {
+      this.list.insertBefore(li.nextElementSibling, li)
+
+      const nextChicken = this.chickens[index + 1]
+      this.chickens[index + 1] = chicken
+      this.chickens[index] = nextChicken
+      this.saveList()
+    }
+  }
+
+  edit(chicken, ev) {
+    const li = ev.target.closest('.chicken')
+    const nameField = li.querySelector('.chicken-name')
+
+    const btn = li.querySelector('.edit.button')
+    const icon = btn.querySelector('i.fa')
+
+    if(nameField.isContentEditable) {
+      nameField.contentEditable = false
+      icon.classList.remove('fa-check')
+      icon.classList.add('fa-pencil')
+      btn.classList.remove('success')
+
+      chicken.name = nameField.textContent
+      this.saveList()
+    } else {
+      nameField.contentEditable = true
+      nameField.focus()
+      icon.classList.remove('fa-pencil')
+      icon.classList.add('fa-check')
+      btn.classList.add('success')
+    }
+  }
+
+  saveOnEnter(chicken, ev) {
+    if (ev.key === 'Enter') {
+      this.edit(chicken, ev)
+    }
   }
 }
 
