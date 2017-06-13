@@ -1,7 +1,7 @@
 class App {
   constructor(selectors) {
     this.chickens = []
-    // this.countries = []
+    this.countries = []
     this.max = 0
     this.listTemplate = document
       .querySelector(selectors.listTemplateSelector)
@@ -91,33 +91,39 @@ class App {
     this.saveList()
   }
 
+  checkCountry(country) {
+    console.log('checked country')
+    for (var i = 0; i < this.countries.length; i++) {
+      return this.countries[i] === country
+    }
+  }
+
   createCountry(ev, chicken) {
     ev.preventDefault()
 
-    // for(let i = 0; i < this.countries.length - 1; i++) {
-      // if(this.countries[i] = chicken.country) {
-      //   // Select previously created country list
-      //   break
-      // } else {
-      // }
-    // }
+    if(this.checkCountry(chicken.country)) {
+      // Insert chicken into pre-existing country
+      var countryList = document.querySelector('.chicken-list.' + chicken.country.toLowerCase())
+      console.log('put it in the old country')
+    } else {
+      // Create new country list
+      console.log('put it in the new country')
+      var countryList = this.listTemplate.cloneNode(true)
+      countryList = countryList.querySelector('ul')
+      countryList.dataset.id = chicken.id
 
-    // Create new country list
-    var countryList = this.listTemplate.cloneNode(true)
-    countryList = countryList.querySelector('ul')
-    countryList.dataset.id = chicken.id
+      countryList
+        .classList.add(chicken.country.replace(/\s/g, '').toLowerCase())
 
-    console.log(countryList)
+      countryList
+        .querySelector('.list-title')
+        .textContent = chicken.country.toUpperCase()
 
-    countryList
-      .classList.add(chicken.country.toLowerCase())
+      this.listBox
+        .appendChild(countryList)
 
-    countryList
-      .querySelector('.list-title')
-      .textContent = chicken.country.toUpperCase()
-
-    this.listBox
-      .appendChild(countryList)
+      this.countries.unshift(chicken.country.replace(/\s/g, '').toLowerCase())
+    }
 
     return countryList
   }

@@ -1,8 +1,4 @@
-.chicken.template {
-  display: none;
-}
-
-.list-template {
+.chicken.template, .list-template {
   display: none;
 }
 
@@ -49,6 +45,6 @@ h1 {
   text-align: center;
 }
 
-ul {
-  margin-top: 50px;
+.chicken-list {
+  margin: 50px 200px;
 }
